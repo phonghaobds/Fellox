@@ -1,10 +1,10 @@
 import React from "react";
 
-import "./Task.scss";
+import "./Card.scss";
 
-function Task() {
+function Card() {
   return (
-    <li className="task-item">
+    <li className="card-item">
       <img
         src="https://images.squarespace-cdn.com/content/v1/5d9fa3d14b2d110c1d455300/1603724603131-AM9TJCBWE0RBW0JP7TXN/scene+3.jpg?format=1000w"
         alt="Img"
@@ -13,4 +13,4 @@ function Task() {
     </li>
   );
 }
-export default Task;
+export default Card;
