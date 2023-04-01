@@ -9,7 +9,6 @@ body {
 
 .fellox-master {
   height: 100vh;
-  display: grid;
-  grid-template-rows: 60px 50px 1fr;
+  overflow: hidden;
   background-color: $board-bg-color;
 }
