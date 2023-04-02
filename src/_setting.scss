@@ -6,7 +6,8 @@ $navbar-app-height: 5vh;
 $navbar-board-height: 6vh;
 $board-content-height: 88vh;
 //colors
-$board-bg-color: #efefef;
+$app-main-text-color: #333;
+$board-bg-color: #e4e4e4;
 $common-element-bg: rgba(150, 150, 150, 0.24);
 
 //Screen
@@ -15,3 +16,5 @@ $screen-md: 992px;
 $screen-sm: 768px;
 $screen-phone: 480px;
 $screen-ip6-down: "(max-width: 375px)";
+
+$column-border-radius: 4px;
