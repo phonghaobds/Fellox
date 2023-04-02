@@ -5,12 +5,8 @@ import "./Column.scss";
 import Card from "components/Card/Card";
 import { mapOrder } from "utilities/sorts";
 function Column(props) {
-  const { column } = props;
-  const cards = mapOrder(column.cards, column.cardOder, "id");
-
-  const onCardDrop = (dropResult) => {
-    console.log(dropResult);
-  };
+  const { column, onCardDrop } = props;
+  const cards = mapOrder(column.cards, column.cardOrder, "id");
 
   return (
     <div className="column">
@@ -19,7 +15,7 @@ function Column(props) {
         <Container
           orientation="vertical"
           groupName="col"
-          onDrop={onCardDrop}
+          onDrop={(dropResult) => onCardDrop(column.id, dropResult)}
           getChildPayload={(index) => cards[index]}
           dragClass="card-ghost"
           dropClass="card-ghost-drop"
@@ -37,7 +33,11 @@ function Column(props) {
           ))}
         </Container>
       </div>
-      <footer>Add another card</footer>
+      <footer>
+        <div className="footer-actions">
+          <i className="fa fa-plus icon" /> Add another card
+        </div>
+      </footer>
     </div>
   );
 }
