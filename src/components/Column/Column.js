@@ -12,8 +12,9 @@ import {
   saveContentAfterPressEnter,
   selectAllInlineText,
 } from "utilities/contentEditable";
+import { createNewCard, updateColumn } from "actions/ApiCall";
 function Column(props) {
-  const { column, onCardDrop, onUpdateColumn } = props;
+  const { column, onCardDrop, onUpdateColumnState } = props;
   const cards = mapOrder(column.cards, column.cardOrder, "_id");
 
   const [showConfirmModal, setShowConfirmModal] = useState(false);
@@ -50,17 +51,27 @@ function Column(props) {
         ...column,
         _destroy: true,
       };
-      onUpdateColumn(newColumn);
+      //Call api update column
+      updateColumn(newColumn._id, newColumn).then((updatedColumn) => {
+        onUpdateColumnState(updatedColumn);
+      });
     }
     toggleShowConfirmModal();
   };
   const handleColumnTitleBlur = () => {
     console.log(columnTitle);
-    const newColumn = {
-      ...column,
-      title: columnTitle,
-    };
-    onUpdateColumn(newColumn);
+
+    if (columnTitle !== column.title) {
+      const newColumn = {
+        ...column,
+        title: columnTitle,
+      };
+      //Call api update column
+      updateColumn(newColumn._id, newColumn).then((updatedColumn) => {
+        updatedColumn.cards = newColumn.cards;
+        onUpdateColumnState(updatedColumn);
+      });
+    }
   };
 
   const addNewCard = () => {
@@ -70,20 +81,19 @@ function Column(props) {
     }
 
     const newCardToAdd = {
-      id: Math.random().toString(36).substr(2, 5), // 5 random characters, will remove when we implement code api
       boardId: column.boardId,
       columnId: column._id,
       title: newCardTitle.trim(),
-      cover: null,
     };
+    createNewCard(newCardToAdd).then((card) => {
+      let newColumn = cloneDeep(column);
+      newColumn.cards.push(card);
+      newColumn.cardOrder.push(card._id);
 
-    let newColumn = cloneDeep(column);
-    newColumn.cards.push(newCardToAdd);
-    newColumn.cardOrder.push(newCardToAdd._id);
-
-    onUpdateColumn(newColumn);
-    setNewCardTitle("");
-    toggleOpenNewCardForm();
+      onUpdateColumnState(newColumn);
+      setNewCardTitle("");
+      toggleOpenNewCardForm();
+    });
   };
   return (
     <div className="column">
