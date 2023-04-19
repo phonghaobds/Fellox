@@ -8,9 +8,10 @@ $column-height: calc(#{$board-content-height} - #{$gap * 2});
   width: 300px;
   height: $column-height;
   margin-left: $gap;
+  padding-top: 8px;
   > * {
     background-color: $column-bg-color;
-    padding: 0 8px;
+    padding: 8px 8px;
   }
   header.column-drag-handle {
     padding: 5px 8px;
@@ -20,6 +21,10 @@ $column-height: calc(#{$board-content-height} - #{$gap * 2});
     font-weight: bold;
     border-top-left-radius: $column-border-radius;
     border-top-right-radius: $column-border-radius;
+    background: #DFF0D8;
+    border: 1px solid #28A745;
+    border-bottom: none;
+    border-radius: 5px 5px 0 0;
     cursor: pointer;
     display: flex;
     .column-title {
@@ -29,8 +34,8 @@ $column-height: calc(#{$board-content-height} - #{$gap * 2});
       flex: 10%;
       .dropdown {
         button.dropdown-btn {
-          background-color: $column-bg-color;
-          border-color: $column-bg-color;
+          background-color: #DFF0D8;
+          border: none;
           color: $app-main-text-color;
           padding: 0 $gap;
           height: 32px;
@@ -69,7 +74,9 @@ $column-height: calc(#{$board-content-height} - #{$gap * 2});
     line-height: $column-footer-height;
     border-bottom-left-radius: $column-border-radius;
     border-bottom-right-radius: $column-border-radius;
-    color: #888;
+    color: #36373A;
+    background: #c6cfda;
+    align-items: center;
     .footer-actions {
       margin-left: 5px;
       cursor: pointer;
@@ -84,6 +91,10 @@ $column-height: calc(#{$board-content-height} - #{$gap * 2});
       100% - #{$column-header-height} - #{$column-footer-height}
     );
     overflow-y: auto;
+    background: #fff;
+    border: 1px solid #28A745;
+    border-top: none;
+    border-bottom: none;
     &::-webkit-scrollbar {
       -webkit-appearance: none;
     }

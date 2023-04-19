@@ -1,0 +1,36 @@
+@import "_setting.scss";
+$appbar-bg-color: #009933;
+
+
+.navbar-light{
+    background: $appbar-bg-color !important;
+    .container{
+        max-width: 1500px !important;
+        .navbar-brand{
+            color: white;
+            font-size: 25px;
+        }
+        .nav-link{
+            font-size: 20px;
+            border: 1px solid white;
+            border-top: none;
+            border-right: none;
+            border-bottom: none;
+            padding-left: 20px;
+        }
+        span, a{
+            color: white;
+            font-size: 16px;
+            a{
+                text-decoration: none;
+            }
+        }
+        .btn-success{
+            margin-right: 10px;
+            border: 1px solid white;
+        }
+        .btn-warning{
+            border: 1px solid #000;
+        }
+    }
+}
