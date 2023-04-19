@@ -19,6 +19,7 @@ import {
   updateColumn,
   updateCard,
 } from "actions/ApiCall";
+import { flushSync } from "react-dom";
 function BoardContent() {
   const [board, setBoard] = useState({});
   const [columns, setColumns] = useState({});
@@ -80,8 +81,10 @@ function BoardContent() {
       currentColumn.cardOrder = currentColumn.cards.map((i) => i._id);
       // console.log(currentColumn);
 
-      setColumns(newColumns);
-      if (dropResult.removedIndex !== null || dropResult.addedIndex !== null) {
+      //automatic batching for fewer renders in react 18
+      flushSync(() => setColumns(newColumns));
+
+      if (dropResult.removedIndex !== null && dropResult.addedIndex !== null) {
         /**
          * Action move card inside its column
          * 1 - Call api update cardOrder in current column
@@ -101,6 +104,7 @@ function BoardContent() {
           let currentCard = cloneDeep(dropResult.payload);
           currentCard.columnId = currentColumn._id;
           // 2 - Call api update columnIn in current card
+
           updateCard(currentCard._id, currentCard);
         }
       }
